@@ -49,7 +49,7 @@ jobs:
         GEMINI_API_KEY: mock-api-key
       run: |
         # Run backend tests
-        pytest app/tests/unit -v
+        python -m pytest app/tests/unit -v
 
   frontend-ci:
     name: Frontend CI (Angular Compilation)
