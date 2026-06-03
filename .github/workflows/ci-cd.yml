@@ -42,11 +42,11 @@ jobs:
 
     - name: Run Unit Tests
       env:
-        DATABASE_URL: sqlite+aiosqlite:///:memory:
-        REDIS_URL: redis://localhost:6379/0
-        QDRANT_URL: http://localhost:6333
-        QDRANT_COLLECTION: test_schema_embeddings
-        GEMINI_API_KEY: mock-api-key
+        DATABASE_URL: "sqlite+aiosqlite:///:memory:"
+        REDIS_URL: "redis://localhost:6379/0"
+        QDRANT_URL: "http://localhost:6333"
+        QDRANT_COLLECTION: "test_schema_embeddings"
+        GEMINI_API_KEY: "mock-api-key"
       run: |
         # Run backend tests
         python -m pytest app/tests/unit -v
