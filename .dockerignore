@@ -1,0 +1,31 @@
+# Ignore virtual environments
+venv/
+.venv/
+env/
+*env/
+
+# Ignore node modules
+node_modules/
+**/node_modules/
+
+# Ignore build artifacts & cache
+.angular/
+frontend/.angular/
+frontend/dist/
+dist/
+
+# Ignore python caches
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+.coverage
+.mypy_cache/
+
+# Ignore Git and metadata
+.git/
+.github/
+.vscode/
+
+# Ignore environment variables
+.env
+.env.example

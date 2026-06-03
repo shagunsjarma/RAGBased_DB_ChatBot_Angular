@@ -1,0 +1,10 @@
+# Ignore node modules
+node_modules/
+
+# Ignore Angular build cache and outputs
+.angular/
+dist/
+
+# Ignore local editor configs
+.vscode/
+.editorconfig

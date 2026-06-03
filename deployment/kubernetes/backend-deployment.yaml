@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-chatbot-backend
+  namespace: default
+  labels:
+    app: rag-chatbot-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rag-chatbot-backend
+  template:
+    metadata:
+      labels:
+        app: rag-chatbot-backend
+    spec:
+      containers:
+      - name: backend
+        image: rag-chatbot-backend:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: database-url
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gemini-credentials
+              key: api-key
+        - name: REDIS_URL
+          value: redis://redis-service:6379/0
+        - name: QDRANT_URL
+          value: http://qdrant-service:6333
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20
