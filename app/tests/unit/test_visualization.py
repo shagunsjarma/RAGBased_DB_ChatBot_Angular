@@ -17,7 +17,7 @@ def test_chart_selector_numeric() -> None:
         {"region": "East", "sales": 4000},
     ]
 
-    charts = selector.select_chart_types(columns, data_types, rows)
+    charts = selector.select_chart_types(columns, data_types, len(rows), rows)
     
     # Should recommend at least a bar chart for categorical vs numeric
     assert len(charts) >= 1
