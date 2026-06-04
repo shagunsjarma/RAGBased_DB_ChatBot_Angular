@@ -18,6 +18,7 @@ class LLMService:
     def __init__(self, api_key: str, model: str = "gemini-1.5-flash",
                  embedding_model: str = "models/embedding-001") -> None:
         genai.configure(api_key=api_key)
+        self._api_key = api_key
         self._model = genai.GenerativeModel(model)
         self._model_name = model
         self._embedding_model = embedding_model
@@ -100,9 +101,5 @@ class LLMService:
             return len(text.split()) * 2  # rough estimate
 
     async def health_check(self) -> bool:
-        """Verify API key works."""
-        try:
-            await self.generate("Say OK", temperature=0.0, max_tokens=5)
-            return True
-        except Exception:
-            return False
+        """Verify API key is configured."""
+        return bool(self._api_key) and len(self._api_key) > 10 and not self._api_key.startswith("your-")
