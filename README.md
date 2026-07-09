@@ -9,15 +9,20 @@ It is composed of a performant **FastAPI backend** and a modern **Angular Single
 ## Key Features
 
 1. **Intelligent Query Translation**: Highly tuned multi-turn SQL generation leveraging Google Gemini (`gemini-2.5-flash`), featuring smart schema context extraction, CTE support, and automated error-correction loops.
-2. **Hybrid RAG Introspection**: Connects to your database, introspects tables/indexes/columns/sample rows, splits the schema into semantically enriched chunks, generates embeddings, and retrieves precise contexts via Qdrant hybrid vector search and Gemini reranking.
-3. **Standalone Angular Workspace**: A modular client built using Angular standalone components featuring:
+2. **LangGraph Orchestration**: The entire backend pipeline is built on a formal LangGraph `StateGraph`, providing robust, deterministic state management and explicit conditional routing between multi-agent nodes.
+3. **Hybrid RAG Introspection**: Connects to your database, introspects tables/indexes/columns/sample rows, splits the schema into semantically enriched chunks, generates embeddings, and retrieves precise contexts via Qdrant hybrid vector search and Gemini reranking.
+4. **Standalone Angular Workspace**: A modular client built using Angular standalone components featuring:
    - **Conversation History Sidebar**: Create, list, load, and delete database-persisted chats.
    - **SQL Debugger Box**: A collapsible syntax-colored container highlighting generated queries and run latency.
    - **Data Visualizer**: Frost-bordered paginated data tables displaying query rows.
    - **Dynamic Dashboards**: Interactive charts (Bar, Line, Scatter, Pie, Funnel, Treemap) compiled client-side using Plotly.js.
    - **AI Statistical Insights Deck**: Diagnostic cards summarizing findings, trends, anomalies (IQR/Z-Score), and recommendations.
-4. **Operations & Security**: JWT-based session security, Prometheus performance metrics middleware, Redis-backed query caching, structured JSON logging, and token usage budget trackers.
-5. **Unified Deployment & CI/CD**: Containerized Docker Compose file running Nginx reverse-proxy to serve assets and route APIs on port 80 (eliminating CORS), and GitHub Actions workflows checking backend unit tests and frontend compilation builds.
+5. **DTDL Observability & Evaluation**: Fully closes the Data-To-Dashboard Lifecycle gap with:
+   - **LangSmith Tracing**: Deep, node-level visual tracing and latency tracking for every step in the LangGraph pipeline.
+   - **RAGAS Metrics**: Automated background evaluation of context precision, recall, answer relevancy, and faithfulness.
+   - **LLM-as-Judge**: Automated scoring of the generated SQL correctness against the original natural language intent.
+6. **Operations & Security**: JWT-based session security, Prometheus performance metrics middleware, Redis-backed query caching, structured JSON logging, and token usage budget trackers.
+7. **Unified Deployment & CI/CD**: Containerized Docker Compose file running Nginx reverse-proxy to serve assets and route APIs on port 80 (eliminating CORS), and GitHub Actions workflows checking backend unit tests and frontend compilation builds.
 
 ---
 
